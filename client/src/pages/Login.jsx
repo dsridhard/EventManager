@@ -34,6 +34,7 @@ export default function Login() {
       );
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userData", res.data.user.name);
+      localStorage.setItem("userid", res.data.user.id);
       navigate("/my-bookings");
     } catch (error) {
       const backendMsg = error?.response?.data?.msg || "Login failed";
@@ -134,7 +135,7 @@ export default function Login() {
                   background: "linear-gradient(90deg, #FFD600, #FFB300)",
                   color: "black",
                   mt: 2,
-                 "&:hover": {
+                  "&:hover": {
                     background: "linear-gradient(90deg, #FFB300, #FFD600)",
                     boxShadow: "none",
                   },

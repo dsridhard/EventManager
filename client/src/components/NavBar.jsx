@@ -8,14 +8,19 @@ import {
   Menu,
   MenuItem,
   Container,
+  Avatar,
+  Tooltip,
 } from "@mui/material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link as RouterLink, useNavigate, useLocation } from "react-router-dom";
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  const handleMenuClick = (e) => setAnchorEl(e.currentTarget);
-  const handleMenuClose = () => setAnchorEl(null);
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   const Token = localStorage.getItem("token");
   const userData = localStorage.getItem("userData");
   const location = useLocation();
@@ -26,16 +31,18 @@ export default function Navbar() {
     // setUser(null);
     navigate("/login");
   };
-
+  const handleBooking = () => {
+    navigate("/my-bookings");
+    handleMenuClose();
+  };
   return (
     <AppBar
-      // position="static"
+      position="sticky"
       elevation={0}
       sx={{
-        background: "rgba(110, 6, 174, .6)",
+        background: "rgba(145, 13, 228)",
         boxShadow: "none",
         width: "100vw",
-        px: 0,
       }}
     >
       <Container maxWidth={false} sx={{ px: { xs: 2, md: 6 } }}>
@@ -50,14 +57,18 @@ export default function Navbar() {
         >
           {/* Logo */}
           <Typography
+            component={RouterLink}
+            to="/"
             variant="h4"
-            component="div"
+            // component="div"
+
             sx={{
               fontWeight: 700,
               color: "#FFD600",
               letterSpacing: 1,
               fontFamily: "Montserrat, sans-serif",
               mr: 6,
+              textDecoration: "none",
             }}
           >
             eventoo
@@ -110,17 +121,7 @@ export default function Navbar() {
             >
               Event
             </Button>
-            <Button
-              sx={{
-                color: "#fff",
-                fontWeight: 600,
-                fontSize: 18,
-                textTransform: "none",
-              }}
-              disableRipple
-            >
-              Testimonial
-            </Button>
+
             <Button
               sx={{
                 color: "#fff",
@@ -132,9 +133,9 @@ export default function Navbar() {
             >
               Contact
             </Button>
-            {userData ? (
+
+            {userData && (
               <>
-                {" "}
                 <Button
                   sx={{
                     color: "#fff",
@@ -142,26 +143,16 @@ export default function Navbar() {
                     fontSize: 18,
                     textTransform: "none",
                   }}
-                  endIcon={<ArrowDropDownIcon />}
                   disableRipple
-                  onClick={handleMenuClick}
+                  onClick={handleBooking}
                 >
-                  Pages
+                  MyBookings
                 </Button>
+                <Tooltip title={userData}>
+                  <Avatar>{userData.slice(0, 1).toUpperCase()}</Avatar>
+                </Tooltip>
               </>
-            ) : (
-              <></>
             )}
-            <Menu
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleMenuClose}
-              anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-            >
-              <MenuItem onClick={handleMenuClose}>MyBooking</MenuItem>
-              <MenuItem onClick={handleMenuClose}>FAQ</MenuItem>
-              {/* Add more menu items as needed */}
-            </Menu>
           </Box>
 
           {/* Registration button */}
