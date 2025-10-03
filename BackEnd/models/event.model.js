@@ -6,6 +6,7 @@ const eventSchema = new mongoose.Schema(
     date: Date,
     location: String,
     capacity: Number,
+    speaker:String,
     organizer: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     attendees: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }]
   },

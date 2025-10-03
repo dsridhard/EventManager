@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import MyBookings from "./pages/MyBookings";
 import Navbar from "./components/NavBar";
 import Admin from "./pages/Admin";
+import Speakers from "./pages/Speakers";
 export default function App() {
   return (
     <div>
@@ -16,7 +17,8 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/my-bookings" element={<MyBookings />} />
-        <Route  path="/admin" element={<Admin/>}/>
+        <Route path="/admin" element={<Admin />} />
+        <Route path="/speakers" element={<Speakers />}></Route>
       </Routes>
     </div>
   );

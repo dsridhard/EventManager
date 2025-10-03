@@ -23,6 +23,8 @@ router.get("/my", auth, async (req, res) => {
   res.json(bookings);
 });
 
+
+
 // Organizer/Admin: Update event
 // router.put("/:eventId", auth, async (req, res) => {
 //   const Event = await Event.D(req.params.eventId);
@@ -42,6 +44,10 @@ router.delete("/:bookingId", auth, async (req, res) => {
   }
 });
 
-
+// Speaker routes
+router.get("/speaker", async (req, res) => {
+  const speakers = await Event.find().select('speaker');
+  res.json({ "msg": "Success", speakers })
+})
 
 export default router;

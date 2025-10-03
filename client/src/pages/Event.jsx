@@ -64,7 +64,7 @@ export default function Events() {
   };
 
   return (
-    <Box sx={{ p: 2, maxWidth: 1180, mx: "auto", flexGrow: 1 }}>
+    <Box sx={{mb:30, p: 2, maxWidth: 1180, mx: "auto", flexGrow: 1,marginTop:11 }}>
       <Typography
         variant="h4"
         sx={{ textAlign: "center", mb: 2, fontWeight: 700 }}
@@ -109,12 +109,12 @@ export default function Events() {
           <Grid item size={{ xs: 2, sm: 3, md: 4 }} key={ev._id}>
             <Card
               sx={{
-                width: 360,
+                width: 240,
                 borderRadius: 3,
                 boxShadow: 4,
                 borderLeft: "8px solid #d68a19ff",
                 background: "linear-gradient(90deg,#fff 75%,#f4f7fa 100%)",
-                height: 170,
+                height: 230,
                 display: "flex",
                 alignItems: "center",
               }}

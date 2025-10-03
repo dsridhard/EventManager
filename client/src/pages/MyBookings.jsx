@@ -6,6 +6,8 @@ import {
   Grid,
   Box,
   Button,
+  Alert,
+  AlertTitle,
 } from "@mui/material";
 import axios from "axios";
 
@@ -13,6 +15,8 @@ export default function MyBookings() {
   const [bookings, setBookings] = useState([]);
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [loading, setLoading] = useState(true);
+  const [isCancel, SetCancel] = useState(false);
+  const [isFailed, setFailed] = useState({ msg: "", state: false });
 
   // keep token updated if user logs in/out on other tabs
   useEffect(() => {
@@ -49,10 +53,12 @@ export default function MyBookings() {
         headers: { Authorization: ` Bearer ${token}` },
       });
       // setBookings((prev) => prev.filter((b) => b._id !== bookingId));
-      alert("Booking cancelled successfully!");
+      // alert("Booking cancelled successfully!");
+      SetCancel(true);
     } catch (err) {
       console.error("Cancel error:", err);
-      alert("Failed to cancel booking");
+      setFailed({ msg: `Failed to cancel booking`, state: true });
+      // alert("Failed to cancel booking");
     }
   };
 
@@ -67,14 +73,50 @@ export default function MyBookings() {
   }
 
   return (
-    <Box sx={{ p: 2, maxWidth:1200, mx: "auto", marginTop: 5 ,flexGrow: 1}}>
+    <Box
+      sx={{
+        mb: 30,
+        p: 2,
+        maxWidth: 1180,
+        mx: "auto",
+        marginTop: 11,
+        flexGrow: 1,
+      }}
+    >
       <Typography
         variant="h4"
-        sx={{ textAlign: "center", mb: 3, fontWeight: 700 }}
+        sx={{ textAlign: "center", mb: 4, fontWeight: 700 }}
       >
         My Bookings
       </Typography>
-
+      {isCancel && (
+        <>
+          <Alert
+            sx={{ width: 300, marginBlock: 4 }}
+            variant="standard"
+            severity="warning"
+            onClose={() => {
+              SetCancel(false);
+            }}
+          >
+            <AlertTitle>Success</AlertTitle>
+            Successfully Booking Cancelled
+          </Alert>
+        </>
+      )}
+      {isFailed.state && (
+        <>
+          <Alert
+            severity="error"
+            onClose={() => {
+              setTimeout(setFailed(false), 1000);
+            }}
+          >
+            <AlertTitle>Error</AlertTitle>
+            {isFailed.msg}
+          </Alert>
+        </>
+      )}
       {loading ? (
         <Typography sx={{ textAlign: "center" }}>Loading...</Typography>
       ) : bookings.length === 0 ? (
@@ -82,9 +124,13 @@ export default function MyBookings() {
           You have no bookings yet.
         </Typography>
       ) : (
-        <Grid container spacing={{ xs: 2, md: 4 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <Grid
+          container
+          spacing={{ xs: 2, md: 4 }}
+          columns={{ xs: 4, sm: 8, md: 12 }}
+        >
           {bookings.map((bk) => (
-            <Grid size={{ xs: 2, sm: 3, md: 4 }}  key={bk._id}>
+            <Grid size={{ xs: 2, sm: 3, md: 6 }} key={bk._id}>
               <Card
                 sx={{
                   width: 360,

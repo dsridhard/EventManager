@@ -5,13 +5,11 @@ import {
   Button,
   Box,
   Typography,
-  Menu,
-  MenuItem,
   Container,
   Avatar,
   Tooltip,
 } from "@mui/material";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+
 import { Link as RouterLink, useNavigate, useLocation } from "react-router-dom";
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -37,7 +35,7 @@ export default function Navbar() {
   };
   return (
     <AppBar
-      position="sticky"
+      position="absolute"
       elevation={0}
       sx={{
         background: "rgba(145, 13, 228)",
@@ -98,6 +96,8 @@ export default function Navbar() {
               Home
             </Button>
             <Button
+            component={RouterLink}
+             to="/speakers"
               sx={{
                 color: "#fff",
                 fontWeight: 600,
