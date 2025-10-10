@@ -15,6 +15,7 @@ export default function Events() {
   const [events, setEvents] = useState([]);
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [isSuccessfull, setSuccessfull] = useState(false);
   const [isFailed, setFailed] = useState({ msg: "", state: false });
   // Update token on mount and when localStorage changes (multi-tab support)
@@ -28,8 +29,16 @@ export default function Events() {
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/events")
-      .then((res) => setEvents(res.data))
-      .catch((err) => console.error("Error fetching events:", err));
+      .then((res) => {
+        setEvents(res.data)
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.error("Error fetching events:", err)
+        setLoading(false)
+      }
+
+      );
   }, []);
 
   // Booking handler
@@ -64,7 +73,7 @@ export default function Events() {
   };
 
   return (
-    <Box sx={{mb:30, p: 2, maxWidth: 1180, mx: "auto", flexGrow: 1,marginTop:11 }}>
+    <Box sx={{ mb: 30, p: 2, maxWidth: 1180, mx: "auto", flexGrow: 1, marginTop: 11 }}>
       <Typography
         variant="h4"
         sx={{ textAlign: "center", mb: 2, fontWeight: 700 }}
@@ -74,11 +83,11 @@ export default function Events() {
       {isSuccessfull && (
         <>
           <Alert
-          sx={{width:300}}
-          variant="standard"
+            sx={{ width: 300 }}
+            variant="standard"
             severity="success"
             onClose={() => {
-              setSuccessfull(false );
+              setSuccessfull(false);
             }}
           >
             <AlertTitle>Success</AlertTitle>
@@ -109,7 +118,7 @@ export default function Events() {
           <Grid item size={{ xs: 2, sm: 3, md: 4 }} key={ev._id}>
             <Card
               sx={{
-                width: 240,
+                width: 360,
                 borderRadius: 3,
                 boxShadow: 4,
                 borderLeft: "8px solid #d68a19ff",

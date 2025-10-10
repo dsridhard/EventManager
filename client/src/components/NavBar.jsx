@@ -21,11 +21,16 @@ export default function Navbar() {
 
   const Token = localStorage.getItem("token");
   const userData = localStorage.getItem("userData");
+  const test = localStorage.getItem("testindata");
   const location = useLocation();
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userData");
+    localStorage.removeItem("userid")    
+
+
+    
     // setUser(null);
     navigate("/login");
   };
@@ -96,8 +101,8 @@ export default function Navbar() {
               Home
             </Button>
             <Button
-            component={RouterLink}
-             to="/speakers"
+              component={RouterLink}
+              to="/speakers"
               sx={{
                 color: "#fff",
                 fontWeight: 600,
@@ -123,6 +128,8 @@ export default function Navbar() {
             </Button>
 
             <Button
+              component={RouterLink}
+              to="/contact"
               sx={{
                 color: "#fff",
                 fontWeight: 600,
@@ -148,9 +155,24 @@ export default function Navbar() {
                 >
                   MyBookings
                 </Button>
+                <Button
+                component={RouterLink}
+                to="/admin"   
+                  sx={{
+                    color: "#fff",
+                    fontWeight: 600,
+                    fontSize: 18,
+                    textTransform: "none",
+                  }}
+                  disableRipple
+                  onClick={handleBooking}
+                >
+                  Admin
+                </Button>
                 <Tooltip title={userData}>
                   <Avatar>{userData.slice(0, 1).toUpperCase()}</Avatar>
                 </Tooltip>
+                
               </>
             )}
           </Box>
@@ -180,30 +202,7 @@ export default function Navbar() {
             >
               Logout
             </Button>
-          ) : location.pathname === "/register" ? (
-            <Button
-              component={RouterLink}
-              to="/login"
-              variant="contained"
-              sx={{
-                background: "linear-gradient(90deg, #FFD600, #FFB300)",
-                color: "#222",
-                fontWeight: 700,
-                fontSize: "1.15rem",
-                px: 4,
-                py: 1.2,
-                borderRadius: 2,
-                boxShadow: "none",
-                ml: 3,
-                "&:hover": {
-                  background: "linear-gradient(90deg, #FFB300, #FFD600)",
-                  boxShadow: "none",
-                },
-              }}
-            >
-              SIGN IN
-            </Button>
-          ) : (
+          ) : location.pathname === "/login" ? (
             <Button
               component={RouterLink}
               to="/register"
@@ -224,7 +223,30 @@ export default function Navbar() {
                 },
               }}
             >
-              REGISTRATION
+              Register
+            </Button>
+          ) : (
+            <Button
+              component={RouterLink}
+              to="/login"
+              variant="contained"
+              sx={{
+                background: "linear-gradient(90deg, #FFD600, #FFB300)",
+                color: "#222",
+                fontWeight: 700,
+                fontSize: "1.15rem",
+                px: 4,
+                py: 1.2,
+                borderRadius: 2,
+                boxShadow: "none",
+                ml: 3,
+                "&:hover": {
+                  background: "linear-gradient(90deg, #FFB300, #FFD600)",
+                  boxShadow: "none",
+                },
+              }}
+            >
+              Login
             </Button>
           )}
         </Toolbar>

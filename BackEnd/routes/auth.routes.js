@@ -24,7 +24,9 @@ router.post("/login", async (req, res) => {
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-  res.json({ token, user: { id: user._id, name: user.name, role: user.role } });
+
+  res.json({ token, user: { id: user._id, name: user.name, role: user.role } })
+  // user.role == "admin" ? res.redirect('/admin') : "";
 });
 
 export default router;

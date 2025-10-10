@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   TextField,
@@ -12,7 +13,7 @@ import {
 import { Link as RouterLink } from "react-router-dom";
 export default function Register() {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
-
+  const navigate = useNavigate()
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -21,6 +22,7 @@ export default function Register() {
     try {
       await axios.post("http://localhost:5000/api/auth/register", form);
       alert("Registered! You can now login.");
+      navigate("/login")
     } catch (err) {
       alert(`Registration failed ${err}`);
     }

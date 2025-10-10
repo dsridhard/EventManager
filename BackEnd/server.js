@@ -5,7 +5,8 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes.js";
 import eventRoutes from "./routes/event.routes.js";
 import bookingRoutes from "./routes/booking.routes.js";
-
+import ContactRoutes from "./routes/contact.routes.js";
+import UserRoutes from "./routes/user.routes.js"
 dotenv.config();
 
 const app = express();
@@ -16,7 +17,8 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/bookings", bookingRoutes);
-
+app.use("/api/contact", ContactRoutes)
+app.use("/api/User", UserRoutes)
 app.get("/", (req, res) => res.send("API Running"));
 
 mongoose
