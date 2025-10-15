@@ -4,16 +4,16 @@ import contactSchema from "../models/contactus.model.js"
 const router = express.Router();
 
 // ContactUs
-router.post("/",async (req,res)=>{
-    const {name,email,message} =req.body;
-    console.log({name,email,message})
-   try {
-    
-    const contactus = await contactSchema.create({name,email,message})
-    res.json({msg:"You have successfully submitted your query"})
-   } catch (error) {
-    res.json({err:`Something went Wrong please retry`})
-   }
+router.post("/", async (req, res) => {
+  const { name, email, message } = req.body;
+  console.log({ name, email, message })
+  try {
+
+    const contactus = await contactSchema.create({ name, email, message })
+    res.json({ msg: "You have successfully submitted your query" })
+  } catch (error) {
+    res.json({ err: `Something went Wrong please retry` })
+  }
 })
 
 router.get("/", async (req, res) => {

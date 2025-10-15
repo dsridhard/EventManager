@@ -35,7 +35,7 @@ export default function Login() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userData", res.data.user.name);
       localStorage.setItem("userid", res.data.user.id);
-      localStorage.setItem("testindata",[{"first":"first","second":"second"}])
+      localStorage.setItem("testindata", [{ "first": "first", "second": "second" }])
       if (res.data.user.role === "user") {
         navigate("/my-bookings");
       }
