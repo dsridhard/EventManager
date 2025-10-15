@@ -74,6 +74,7 @@ const ContactForm = () => {
         error={!!errors.message}
         helperText={errors.message?.message}
         multiline
+       maxLength=""
         rows={4}
         fullWidth
       />
