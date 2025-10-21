@@ -1,9 +1,13 @@
 import React from 'react'
 
 const Booking = () => {
+const userDataString = localStorage.getItem('role')
+const TestuserData = JSON.stringify(userDataString);
+const TestParseData = JSON.parse(TestuserData)
+console.log(TestParseData)
   return (
     <div>
-      Manage Booking
+    This is   Manage Booking Page
     </div>
   )
 }

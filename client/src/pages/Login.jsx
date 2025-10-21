@@ -19,6 +19,11 @@ export default function Login() {
   const [errorMsg, setErrorMsg] = React.useState(""); // State for error message
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
+  const user = {
+        name: "Alice",
+        age: 25,
+        hobbies: ["reading", "coding", "traveling"]
+      };
 
   const {
     register,
@@ -35,12 +40,17 @@ export default function Login() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userData", res.data.user.name);
       localStorage.setItem("userid", res.data.user.id);
-      localStorage.setItem("testindata", [{ "first": "first", "second": "second" }])
+      localStorage.setItem("TestinguserData", (user));
+      // localStorage.setItem("testindata", res.data)
       if (res.data.user.role === "user") {
+        localStorage.setItem("roleType",res.data.user.role)
         navigate("/my-bookings");
+        
       }
       else {
+        localStorage.setItem("roleType",res.data.user.role)
         navigate("/admin")
+        
       }
     } catch (error) {
       const backendMsg = error?.response?.data?.msg || "Login failed";

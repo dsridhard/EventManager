@@ -15,6 +15,7 @@ import {
   FormControl
 } from '@mui/material'
 const AddUser = () => {
+  let sno = 1
   const [getUsers, setUsers] = useState([])
   const [open, setOpen] = React.useState(false);
   const [getRole, setRole] = useState([])
@@ -108,6 +109,9 @@ const AddUser = () => {
         <Table sx={{ minWidth: 980 }} aria-label="simple table">
           <TableHead>
             <TableRow>
+              <TableCell>
+                  S.No
+                 </TableCell>
               <TableCell>Name</TableCell>
               <TableCell align="right">Email</TableCell>
               <TableCell align="right">Role</TableCell>
@@ -117,12 +121,16 @@ const AddUser = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {  
+            {   
                 getUsers.map((row) => (
+                   
               <TableRow
                 key={row._id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
+                 <TableCell>
+                 {sno++}
+                 </TableCell>
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>

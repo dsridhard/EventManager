@@ -12,7 +12,7 @@ import {
 
 const Queries = () => {
   const [listQuery, setQuery] = useState([]);
-
+  let sno = 1 
   useEffect(() => {
     const requestOptions = {
       method: "GET",
@@ -38,6 +38,7 @@ const Queries = () => {
         <Table sx={{ minWidth: 980 }} aria-label="queries table">
           <TableHead>
             <TableRow>
+              <TableCell align="center">S.No</TableCell>
               <TableCell align="center">Name</TableCell>
               <TableCell align="center">Email</TableCell>
               <TableCell align="center">Message</TableCell>
@@ -48,6 +49,7 @@ const Queries = () => {
           <TableBody>
             {listQuery.map((element) => (
               <TableRow key={element._id}>
+                <TableCell align="center">{sno++}</TableCell>
                 <TableCell align="center">{element.name}</TableCell>
                 <TableCell align="center">{element.email}</TableCell>
                 <TableCell align="center">{element.message}</TableCell>

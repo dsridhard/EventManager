@@ -12,32 +12,28 @@ import {
 
 import { Link as RouterLink, useNavigate, useLocation } from "react-router-dom";
 export default function Navbar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
+
+
+
 
   const Token = localStorage.getItem("token");
   const userData = localStorage.getItem("userData");
-  const test = localStorage.getItem("testindata");
+  const role = localStorage.getItem("roleType");
   const location = useLocation();
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userData");
-    localStorage.removeItem("userid")    
+    localStorage.removeItem("userid")
+    localStorage.removeItem("role")
 
 
-    
+
     // setUser(null);
     navigate("/login");
   };
-  const handleBooking = () => {
-    navigate("/my-bookings");
-    handleMenuClose();
-  };
+
   return (
     <AppBar
       position="absolute"
@@ -143,36 +139,42 @@ export default function Navbar() {
 
             {userData && (
               <>
-                <Button
-                  sx={{
-                    color: "#fff",
-                    fontWeight: 600,
-                    fontSize: 18,
-                    textTransform: "none",
-                  }}
-                  disableRipple
-                  onClick={handleBooking}
-                >
-                  MyBookings
-                </Button>
-                <Button
-                component={RouterLink}
-                to="/admin"   
-                  sx={{
-                    color: "#fff",
-                    fontWeight: 600,
-                    fontSize: 18,
-                    textTransform: "none",
-                  }}
-                  disableRipple
-                  onClick={handleBooking}
-                >
-                  Admin
-                </Button>
+                {
+
+                  role === 'user' ? <>
+                    <Button
+                      component={RouterLink}
+                      to="/my-bookings"
+                      sx={{
+                        color: "#fff",
+                        fontWeight: 600,
+                        fontSize: 18,
+                        textTransform: "none",
+                      }}
+                      disableRipple
+
+                    >
+                      MyBookings
+                    </Button></> : <><Button
+                      component={RouterLink}
+                      to="/admin"
+                      sx={{
+                        color: "#fff",
+                        fontWeight: 600,
+                        fontSize: 18,
+                        textTransform: "none",
+                      }}
+                      disableRipple
+
+                    >
+                      Admin
+                    </Button></>
+                }
+
                 <Tooltip title={userData}>
                   <Avatar>{userData.slice(0, 1).toUpperCase()}</Avatar>
                 </Tooltip>
-                
+
               </>
             )}
           </Box>

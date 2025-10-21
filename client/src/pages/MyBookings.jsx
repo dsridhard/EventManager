@@ -17,7 +17,7 @@ export default function MyBookings() {
   const [loading, setLoading] = useState(true);
   const [isCancel, SetCancel] = useState(false);
   const [isFailed, setFailed] = useState({ msg: "", state: false });
-
+  const storedData = localStorage.getItem("userData");
   // keep token updated if user logs in/out on other tabs
   useEffect(() => {
     const onStorage = () => setToken(localStorage.getItem("token"));
